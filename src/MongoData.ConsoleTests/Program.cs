@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MongoData.ConsoleTests
 {
@@ -9,6 +7,15 @@ namespace MongoData.ConsoleTests
     {
         public static void Main(string[] args)
         {
+            AppStartup.Run();
+            Console.WriteLine("Press any key to start...");
+            Console.ReadKey();
+
+            //run test here
+            var testDb = AppStartup.ServiceProvider.GetService<TestDb>();
+            testDb.Run();
+
+            Console.ReadLine();
         }
     }
 }
