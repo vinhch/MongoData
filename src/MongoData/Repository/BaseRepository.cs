@@ -62,6 +62,16 @@ namespace MongoData.Repository
             Collection.DeleteMany(x => true);
         }
 
+        public virtual void Drop()
+        {
+            Collection.Database.DropCollection(Collection.CollectionNamespace.CollectionName);
+        }
+
+        public virtual bool Exists()
+        {
+            return Collection.AsQueryable().Any();
+        }
+
         public virtual bool Exists(Expression<Func<T, bool>> predicate)
         {
             return Collection.AsQueryable().Any(predicate);
@@ -75,7 +85,10 @@ namespace MongoData.Repository
 
         public virtual void Update(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            foreach (var entity in entities)
+            {
+                Update(entity);
+            }
         }
 
         public virtual T Update(T entity)

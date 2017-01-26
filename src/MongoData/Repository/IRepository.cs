@@ -45,7 +45,11 @@ namespace MongoData.Repository
 
         void DeleteAll();
 
+        void Drop();
+
         long Count();
+
+        bool Exists();
 
         bool Exists(Expression<Func<T, bool>> predicate);
     }
