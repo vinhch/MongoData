@@ -1,5 +1,4 @@
 ﻿using System;
-using MongoData.Helper;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoData.Domain

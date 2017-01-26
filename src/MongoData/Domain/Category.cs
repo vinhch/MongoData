@@ -1,5 +1,4 @@
 ﻿using System;
-using MongoData.Helper;
 
 namespace MongoData.Domain
 {

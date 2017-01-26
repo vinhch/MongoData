@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace MongoData.Helper
+namespace MongoData
 {
     internal static class MongoCollectionExtension
     {

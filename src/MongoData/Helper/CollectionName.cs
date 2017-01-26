@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace MongoData.Helper
+namespace MongoData
 {
     [AttributeUsage(AttributeTargets.Class)]
-    internal class CollectionName : Attribute
+    public class CollectionName : Attribute
     {
         public CollectionName(string value)
         {
