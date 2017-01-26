@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MongoData", "src\MongoData\MongoData.xproj", "{A3E0238D-A1B4-488E-A3FE-BBDDD030F099}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MongoData.ConsoleTests", "src\MongoData.ConsoleTests\MongoData.ConsoleTests.xproj", "{33F77E39-6640-4FCA-9B5F-44FA751CFB41}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MongoData.ConsoleTests", "test\MongoData.ConsoleTests\MongoData.ConsoleTests.xproj", "{33F77E39-6640-4FCA-9B5F-44FA751CFB41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{28FF9312-0BD8-4AE3-8394-57907F14DF2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A3E0238D-A1B4-488E-A3FE-BBDDD030F099} = {DF755A65-DC12-4C09-A9DD-6C454BB30C9E}
-		{33F77E39-6640-4FCA-9B5F-44FA751CFB41} = {DF755A65-DC12-4C09-A9DD-6C454BB30C9E}
+		{33F77E39-6640-4FCA-9B5F-44FA751CFB41} = {28FF9312-0BD8-4AE3-8394-57907F14DF2D}
 	EndGlobalSection
 EndGlobal
