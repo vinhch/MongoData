@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MongoData.Repository;
 using MongoData.Tests.Entities;
 using Xunit;
 
 namespace MongoData.Tests
 {
-    [Collection("Repo test")]
+    [Collection("Real Repo test")]
     public class When_batch_add_and_update_repo : IDisposable
     {
         private readonly IRepository<TestCustomer> _testCustomerRepo;

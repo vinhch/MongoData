@@ -6,7 +6,7 @@ using Xunit;
 
 namespace MongoData.Tests
 {
-    [Collection("Repo test")]
+    [Collection("Real Repo test")]
     public class When_single_add_and_update_repo : IDisposable
     {
         private readonly IRepository<TestProduct> _testProductRepo;

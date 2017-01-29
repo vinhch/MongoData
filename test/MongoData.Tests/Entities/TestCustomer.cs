@@ -7,10 +7,6 @@ namespace MongoData.Tests.Entities
     [CollectionName("TestCustomers")]
     public class TestCustomer : Entity
     {
-        public TestCustomer()
-        {
-        }
-
         [BsonElement("fname")]
         public string FirstName { get; set; }
 
@@ -57,5 +53,4 @@ namespace MongoData.Tests.Entities
         [BsonIgnoreIfNull]
         public string Country { get; set; }
     }
-
 }
