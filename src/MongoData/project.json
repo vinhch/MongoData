@@ -1,10 +1,11 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
     "MongoDB.Driver": "2.4.1",
     "NETStandard.Library": "1.6.0",
-    "System.Runtime.Serialization.Primitives": "4.3.0"
+    "System.Runtime.Serialization.Primitives": "4.3.0",
+    "System.Threading.Tasks.Parallel": "4.3.0"
   },
 
   "frameworks": {

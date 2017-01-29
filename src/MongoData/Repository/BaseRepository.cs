@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 
 namespace MongoData.Repository
@@ -85,10 +86,10 @@ namespace MongoData.Repository
 
         public virtual void Update(IEnumerable<T> entities)
         {
-            foreach (var entity in entities)
+            Parallel.ForEach(entities, entity =>
             {
                 Update(entity);
-            }
+            });
         }
 
         public virtual T Update(T entity)
