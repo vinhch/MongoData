@@ -1,6 +1,5 @@
 language: csharp
 solution: MongoData.sln
-mono: none
 services:
     - mongodb
 
@@ -9,9 +8,11 @@ matrix:
     - os: linux # Ubuntu 14.04
       dist: trusty
       sudo: required
+      mono: none
       dotnet: 1.0.0-preview2-003131
     - os: osx # OSX 10.11
       osx_image: xcode7.3
+      mono: none
       dotnet: 1.0.0-preview2-003131
 
 before_script:
