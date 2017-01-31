@@ -1,0 +1,23 @@
+language: csharp
+solution: MongoData.sln
+services:
+    - mongodb
+
+matrix:
+    include:
+        - os: linux # Ubuntu 14.04
+          dist: trusty
+          sudo: required
+          dotnet: 1.0.0-preview2-003121
+        - os: osx # OSX 10.11
+          osx_image: xcode7.2
+          dotnet: 1.0.0-preview2-003121
+
+before_script:
+    - sleep 15
+
+script:
+    - artifactsFolder="./artifacts"
+    - if [ -d $artifactsFolder ]; then rm -R $artifactsFolder; fi
+    - dotnet restore && dotnet build **/project.json
+    - dotnet test test/MongoData.Tests
