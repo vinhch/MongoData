@@ -1,0 +1,16 @@
+image: Visual Studio 2015
+services:
+    - mongodb
+
+branches:
+  # whitelist
+  only:
+    - master
+
+build_script:
+    - set artifactsFolder=.\artifacts
+    - if exist "%artifactsFolder%\" rd /q /s "%artifactsFolder%"
+    - dotnet restore && dotnet build **/project.json
+
+test_script:
+    - dotnet test test/MongoData.Tests

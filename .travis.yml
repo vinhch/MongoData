@@ -3,6 +3,11 @@ solution: MongoData.sln
 services:
     - mongodb
 
+branches:
+  # whitelist
+  only:
+    - master
+
 matrix:
   include:
     - os: linux # Ubuntu 14.04
@@ -16,7 +21,7 @@ matrix:
       dotnet: 1.0.0-preview2-003131
 
 before_script:
-    - sleep 15
+    - sleep 5
 
 script:
     - artifactsFolder="./artifacts"
