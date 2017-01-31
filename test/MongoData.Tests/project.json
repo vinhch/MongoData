@@ -27,6 +27,7 @@
 
   "buildOptions": {
     "emitEntryPoint": false,
+    "preserveCompilationContext": true,
     "copyToOutput": {
       "include": [
         "appsettings.json",

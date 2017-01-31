@@ -17,7 +17,7 @@ namespace MongoData.Tests
                 if (_configuration == null)
                 {
                     var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
+                    //.SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json");
 
                     _configuration = builder.Build();

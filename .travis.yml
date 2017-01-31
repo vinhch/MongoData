@@ -1,5 +1,6 @@
 language: csharp
 solution: MongoData.sln
+mono: none
 services:
     - mongodb
 
