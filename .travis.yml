@@ -21,6 +21,7 @@ matrix:
 #      dotnet: 1.0.0-preview2-003131
 
 before_script:
+    - if echo "$TRAVIS_COMMIT_MESSAGE" | grep -F -q "[skip travis]" ; then echo "[skip travis] has been found, exiting" && exit 0 ; else echo "[skip travis] has not been found, continuing" ; fi
     - sleep 5
 
 script:
