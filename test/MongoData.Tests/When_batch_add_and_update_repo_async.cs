@@ -2,16 +2,17 @@
 using MongoData.Tests.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MongoData.Tests
 {
     [Collection("Real Repo test")]
-    public class When_batch_add_and_update_repo : IDisposable
+    public class When_batch_add_and_update_repo_async : IDisposable
     {
-        private readonly IRepository<TestCustomer> _testCustomerRepo;
+        private readonly IRepositoryAsync<TestCustomer> _testCustomerRepo;
 
-        public When_batch_add_and_update_repo()
+        public When_batch_add_and_update_repo_async()
         {
             Utils.DropDb();
             _testCustomerRepo = new BaseRepository<TestCustomer>(Utils.MongoUnitOfWork);
@@ -23,9 +24,9 @@ namespace MongoData.Tests
         }
 
         [Fact]
-        public void Test()
+        public async Task TestAsync()
         {
-            Assert.False(_testCustomerRepo.Any());
+            Assert.False(await _testCustomerRepo.AnyAsync());
 
             var customers = new List<TestCustomer>
             {
@@ -37,9 +38,9 @@ namespace MongoData.Tests
                 new TestCustomer {FirstName = "Client F"},
                 new TestCustomer {FirstName = "Customer G"}
             };
-            _testCustomerRepo.Add(customers);
+            await _testCustomerRepo.AddAsync(customers);
 
-            var count1 = _testCustomerRepo.Count();
+            var count1 = await _testCustomerRepo.CountAsync();
 
             Assert.Equal(7, count1);
 
@@ -47,7 +48,7 @@ namespace MongoData.Tests
             {
                 customer.LastName = customer.FirstName;
             }
-            _testCustomerRepo.Update(customers);
+            await _testCustomerRepo.UpdateAsync(customers);
 
             foreach (var customer in _testCustomerRepo)
             {

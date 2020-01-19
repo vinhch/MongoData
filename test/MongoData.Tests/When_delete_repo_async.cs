@@ -3,16 +3,17 @@ using MongoData.Tests.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MongoData.Tests
 {
     [Collection("Real Repo test")]
-    public class When_delete_repo : IDisposable
+    public class When_delete_repo_async : IDisposable
     {
-        private readonly IRepository<TestCustomer> _testCustomerRepo;
+        private readonly IRepositoryAsync<TestCustomer> _testCustomerRepo;
 
-        public When_delete_repo()
+        public When_delete_repo_async()
         {
             Utils.DropDb();
             _testCustomerRepo = new BaseRepository<TestCustomer>(Utils.MongoUnitOfWork);
@@ -24,7 +25,7 @@ namespace MongoData.Tests
         }
 
         [Fact]
-        public void BatchTest()
+        public async Task BatchTestAsync()
         {
             var customers = new List<TestCustomer>
             {
@@ -38,19 +39,19 @@ namespace MongoData.Tests
             };
             _testCustomerRepo.Add(customers);
 
-            Assert.Equal(7, _testCustomerRepo.Count());
+            Assert.Equal(7, await _testCustomerRepo.CountAsync());
 
-            _testCustomerRepo.Delete(s => s.FirstName.Contains("Customer"));
+            await _testCustomerRepo.DeleteAsync(s => s.FirstName.Contains("Customer"));
 
-            Assert.Equal(3, _testCustomerRepo.Count());
+            Assert.Equal(3, await _testCustomerRepo.CountAsync());
 
-            _testCustomerRepo.DeleteAll();
+            await _testCustomerRepo.DeleteAllAsync();
 
-            Assert.Equal(0, _testCustomerRepo.Count());
+            Assert.Equal(0, await _testCustomerRepo.CountAsync());
         }
 
         [Fact]
-        public void SingleTest()
+        public async Task SingleTestAsync()
         {
             var customers = new List<TestCustomer>
             {
@@ -62,21 +63,21 @@ namespace MongoData.Tests
                 new TestCustomer {FirstName = "Client F"},
                 new TestCustomer {FirstName = "Customer G"}
             };
-            _testCustomerRepo.Add(customers);
+            await _testCustomerRepo.AddAsync(customers);
 
             var cutomer = _testCustomerRepo.SingleOrDefault(s => s.FirstName == "Customer A");
-            _testCustomerRepo.Delete(cutomer);
+            await _testCustomerRepo.DeleteAsync(cutomer);
             cutomer = _testCustomerRepo.SingleOrDefault(s => s.Id == cutomer.Id);
 
             Assert.Null(cutomer);
 
             cutomer = _testCustomerRepo.SingleOrDefault(s => s.FirstName == "Client B");
-            _testCustomerRepo.Delete(cutomer.Id);
+            await _testCustomerRepo.DeleteAsync(cutomer.Id);
             cutomer = _testCustomerRepo.SingleOrDefault(s => s.Id == cutomer.Id);
 
             Assert.Null(cutomer);
 
-            _testCustomerRepo.DeleteAll();
+            await _testCustomerRepo.DeleteAllAsync();
         }
     }
 }

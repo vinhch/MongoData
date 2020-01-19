@@ -2,15 +2,16 @@
 using MongoData.Tests.Entities;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MongoData.Tests
 {
     [Collection("Real Repo test")]
-    public class When_single_add_and_update_repo : IDisposable
+    public class When_single_add_and_update_repo_async : IDisposable
     {
-        private readonly IRepository<TestProduct> _testProductRepo;
-        public When_single_add_and_update_repo()
+        private readonly IRepositoryAsync<TestProduct> _testProductRepo;
+        public When_single_add_and_update_repo_async()
         {
             Utils.DropDb();
             _testProductRepo = new BaseRepository<TestProduct>(Utils.MongoUnitOfWork);
@@ -22,29 +23,29 @@ namespace MongoData.Tests
         }
 
         [Fact]
-        public void Test()
+        public async Task TestAsync()
         {
-            Assert.False(_testProductRepo.Any());
+            Assert.False(await _testProductRepo.AnyAsync());
 
             var product = new TestProduct
             {
-                Name = "Fristi Milk",
+                Name = "Fristi Milk Async",
                 Description = "Orange Flavor",
                 Price = 10000
             };
-            _testProductRepo.Add(product);
+            await _testProductRepo.AddAsync(product);
 
-            Assert.True(_testProductRepo.Any());
+            Assert.True(await _testProductRepo.AnyAsync());
             Assert.NotNull(product.Id);
 
-            var alreadyAddedProduct = _testProductRepo.SingleOrDefault(c => c.Name == "Fristi Milk");
+            var alreadyAddedProduct = _testProductRepo.SingleOrDefault(c => c.Name == "Fristi Milk Async");
 
             Assert.NotNull(alreadyAddedProduct);
             Assert.Equal(product.Id, alreadyAddedProduct.Id);
 
             alreadyAddedProduct.Description = "Lemon Flavor";
-            _testProductRepo.Update(alreadyAddedProduct);
-            var updatedProduct = _testProductRepo.GetById(product.Id);
+            await _testProductRepo.UpdateAsync(alreadyAddedProduct);
+            var updatedProduct = await _testProductRepo.GetByIdAsync(product.Id);
 
             Assert.NotNull(updatedProduct);
             Assert.Equal(product.Id, updatedProduct.Id);
